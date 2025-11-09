@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CineScore.Data;
+using CineScore.Models;
 
 namespace CineScore.Controllers
 {
