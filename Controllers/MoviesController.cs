@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CineScore.Data;
 using CineScore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineScore.Controllers
 {
@@ -20,12 +21,14 @@ namespace CineScore.Controllers
         }
 
         // GET: Movies
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Movies.ToListAsync());
         }
 
         // GET: Movies/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace CineScore.Controllers
         }
 
         // GET: Movies/Create
+        [Authorize(Roles = "Admin")] 
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace CineScore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Title,Year,Genre,Description,PosterUrl")] Movie movie)
         {
             if (ModelState.IsValid)
@@ -66,6 +71,7 @@ namespace CineScore.Controllers
         }
 
         // GET: Movies/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace CineScore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Genre,Description,PosterUrl")] Movie movie)
         {
             if (id != movie.Id)
@@ -117,6 +124,7 @@ namespace CineScore.Controllers
         }
 
         // GET: Movies/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +145,7 @@ namespace CineScore.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _context.Movies.FindAsync(id);
