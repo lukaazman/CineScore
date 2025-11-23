@@ -1,14 +1,23 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CineScore.Models;
+using CineScore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CineScore.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index()
+    private readonly CineScoreContext _context;
+    public HomeController(CineScoreContext context)
     {
-        return View();
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var movies = await _context.Movies.AsNoTracking().ToListAsync();
+        return View(movies);
     }
 
     public IActionResult Privacy()
