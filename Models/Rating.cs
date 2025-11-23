@@ -1,10 +1,17 @@
-public class Rating
-{
-    public int Id { get; set; }
-    public int Score { get; set; }
-    public int UserId { get; set; }
-    public int MovieId { get; set; }
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System;
 
-    public User? User { get; set; }
-    public Movie? Movie { get; set; }
+namespace CineScore.Models
+{
+    public class Rating
+    {
+        public int Id { get; set; }
+        public int Score { get; set; }
+        public required string UserId { get; set; }
+        public int MovieId { get; set; }
+
+        public User? User { get; set; }
+        public Movie? Movie { get; set; }
+    }
 }

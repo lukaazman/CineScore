@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lukaa\\OneDrive - Univerza v Ljubljani\\Vš 25N26\\Informacijski sistemi\\CineScore\\CineScore.csproj": {}
+    "D:\\GitHub\\CineScore\\CineScore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lukaa\\OneDrive - Univerza v Ljubljani\\Vš 25N26\\Informacijski sistemi\\CineScore\\CineScore.csproj": {
+    "D:\\GitHub\\CineScore\\CineScore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lukaa\\OneDrive - Univerza v Ljubljani\\Vš 25N26\\Informacijski sistemi\\CineScore\\CineScore.csproj",
+        "projectUniqueName": "D:\\GitHub\\CineScore\\CineScore.csproj",
         "projectName": "CineScore",
-        "projectPath": "C:\\Users\\lukaa\\OneDrive - Univerza v Ljubljani\\Vš 25N26\\Informacijski sistemi\\CineScore\\CineScore.csproj",
+        "projectPath": "D:\\GitHub\\CineScore\\CineScore.csproj",
         "packagesPath": "C:\\Users\\lukaa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lukaa\\OneDrive - Univerza v Ljubljani\\Vš 25N26\\Informacijski sistemi\\CineScore\\obj\\",
+        "outputPath": "D:\\GitHub\\CineScore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lukaa\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -44,23 +44,65 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.14.0, )",
+              "noWarn": [
+                "NU1603",
+                "NU1608"
+              ]
+            },
+            "Microsoft.CodeAnalysis.CSharp.Features": {
+              "target": "Package",
+              "version": "[4.14.0, )"
+            },
+            "Microsoft.CodeAnalysis.Common": {
+              "target": "Package",
+              "version": "[4.14.0, )",
+              "noWarn": [
+                "NU1603",
+                "NU1608"
+              ]
+            },
+            "Microsoft.CodeAnalysis.Features": {
+              "target": "Package",
+              "version": "[4.14.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[10.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[10.0.0-rc.1.25458.5, )"
             }
           },
           "imports": [
