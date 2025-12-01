@@ -48,6 +48,7 @@
     <h4>Reviews</h4>
     <hr />
     @if (Model.Comments != null && Model.Comments.Any())
+    {
         foreach (var comment in Model.Comments.OrderByDescending(c => c.CreatedAt))
         {
             <div class="mb-3 p-3 border rounded bg-light">
