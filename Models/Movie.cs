@@ -14,6 +14,7 @@ namespace CineScore.Models
         public string? PosterUrl { get; set; }
 
         public ICollection<Rating>? Ratings { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
     }
 }

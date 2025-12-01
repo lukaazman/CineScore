@@ -37,6 +37,8 @@ namespace CineScore.Controllers
             }
 
             var movie = await _context.Movies
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
