@@ -8,27 +8,114 @@ using Microsoft.EntityFrameworkCore;
 using CineScore.Data;
 using CineScore.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace CineScore.Controllers
 {
     public class MoviesController : Controller
     {
         private readonly CineScoreContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public MoviesController(CineScoreContext context)
+        public MoviesController(CineScoreContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
+        }
+
+        // POST: Movies/DeleteComment/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment == null)
+                return NotFound();
+
+            var userId = _userManager.GetUserId(User);
+            if (comment.UserId != userId)
+                return Forbid(); // only the owner can delete
+
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details_user", new { id = comment.MovieId });
+        }
+
+        // GET: Movies/Review/5
+        [Authorize]
+        public async Task<IActionResult> Review(int id)
+        {
+            var movie = await _context.Movies.FindAsync(id);
+            if (movie == null)
+                return NotFound();
+
+            return View(movie);
+        }
+
+        // POST: Movies/Review/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Review(int id, string text, int rating)
+        {
+            var movie = await _context.Movies.FindAsync(id);
+            if (movie == null)
+                return NotFound();
+
+            var review = new Comment
+            {
+                MovieId = id,
+                Text = text,
+                UserId = _userManager.GetUserId(User),
+                CreatedAt = DateTime.Now,
+                Rating = rating
+            };
+
+            _context.Comments.Add(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details_user", new { id = id });
+        }
+
+        // GET: Home/Index
+        [AllowAnonymous]
+        public async Task<IActionResult> Back()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Movies/Details_user/5
+        [AllowAnonymous]
+        public async Task<IActionResult> Details_user(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = await _context.Movies
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return View(movie);
         }
 
         // GET: Movies
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Movies.ToListAsync());
         }
 
         // GET: Movies/Details/5
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

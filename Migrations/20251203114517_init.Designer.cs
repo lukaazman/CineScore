@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CineScore.Migrations
 {
     [DbContext(typeof(CineScoreContext))]
-    [Migration("20251123093721_init")]
+    [Migration("20251203114517_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace CineScore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
