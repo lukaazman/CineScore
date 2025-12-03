@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CineScore.Models;
 using CineScore.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineScore.Controllers;
 
@@ -12,6 +13,13 @@ public class HomeController : Controller
     public HomeController(CineScoreContext context)
     {
         _context = context;
+    }
+
+    // GET: Home/Admin_dashboard
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Admin_dashboard()
+    {
+        return View();
     }
 
     public async Task<IActionResult> Index()
