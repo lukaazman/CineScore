@@ -1,0 +1,77 @@
+@model Movie
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Write a Review for @Model.Title</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Review" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="form-group">
+                <label>Your Review</label>
+                <textarea class="form-control" name="text" rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label for="star5">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2">&#9733;</label>
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1">&#9733;</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Details_user" asp-route-id="@Model.Id"> Back to Movie </a>
+</div>
+
+@section Styles {
+<style>
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2em;
+    color: lightgray;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: gold;
+}
+
+.rating input:checked + label,
+.rating input:checked + label ~ label {
+    color: gold;
+}
+</style>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
