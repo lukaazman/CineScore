@@ -5,7 +5,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="col-md-4">
+    @if (!string.IsNullOrEmpty(Model.PosterUrl))
+    {
+        <img src="@Model.PosterUrl" class="img-fluid rounded" alt="@Model.Title" />
+    }
+    else
+    {
+        <img src="@Url.Content("~/images/placeholder.jpg") class="img-fluid rounded" alt="No image available" />
+    }
+</div>
 
 <div>
     <h4>Movie</h4>
@@ -35,11 +44,28 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
+        @{
+            double avgRating = 0;
+
+            if (Model.Comments != null && Model.Comments.Any(c => c.Rating > 0))
+            {
+                avgRating = Model.Comments
+                    .Where(c => c.Rating > 0)
+                    .Average(c => c.Rating);
+            }
+        }
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PosterUrl)
+            Average Rating
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PosterUrl)
+            @if (avgRating > 0)
+            {
+                @(avgRating.ToString("0.0") + "/ 5")
+            }
+            else
+            {
+                <span>No ratings yet</span>
+            }
         </dd>
     </dl>
 </div>
