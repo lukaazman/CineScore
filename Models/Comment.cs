@@ -8,6 +8,7 @@ namespace CineScore.Models
     {
         public int Id { get; set; }
         public string Text { get; set; } = "";
+        public int Rating { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public required string UserId { get; set; }

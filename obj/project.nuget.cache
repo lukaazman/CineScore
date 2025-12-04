@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Vo2JczWyBu0=",
+  "dgSpecHash": "SGm+PJsBhWw=",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\CineScore\\CineScore.csproj",
+  "projectFilePath": "C:\\Users\\lukaa\\Documents\\GitHub\\CineScore\\CineScore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lukaa\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\lukaa\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -153,9 +153,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Microsoft.Build' 17.11.4 has a known high severity vulnerability, https://github.com/advisories/GHSA-w3q9-fxm7-j8fq",
-      "projectPath": "D:\\GitHub\\CineScore\\CineScore.csproj",
+      "projectPath": "C:\\Users\\lukaa\\Documents\\GitHub\\CineScore\\CineScore.csproj",
       "warningLevel": 1,
-      "filePath": "D:\\GitHub\\CineScore\\CineScore.csproj",
+      "filePath": "C:\\Users\\lukaa\\Documents\\GitHub\\CineScore\\CineScore.csproj",
       "libraryId": "Microsoft.Build",
       "targetGraphs": [
         "net10.0"

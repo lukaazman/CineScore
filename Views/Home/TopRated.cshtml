@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Movie>
+@model IEnumerable<Movie>
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Top Rated";
 }
 
 <div class="text-center mb-4">
-    <h1 class="display-4">Discover Movies</h1>
-    <p class="lead">Browse the latest additions and open any title to see more details.</p>
+    <h1 class="display-4">Top Rated Movies</h1>
+    <p class="lead">Movies sorted by user ratings from highest to lowest.</p>
 </div>
 
 @if (!Model.Any())
