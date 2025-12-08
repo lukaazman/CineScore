@@ -1,0 +1,29 @@
+@model dynamic
+
+<div class="col">
+    <div class="card h-100 shadow-sm" style="max-width: 220px;">
+        <img src="@(string.IsNullOrWhiteSpace(Model.Movie.PosterUrl) ? "https://via.placeholder.com/220x330?text=No+Poster" : Model.Movie.PosterUrl)"
+             class="card-img-top"
+             alt="@Model.Movie.Title poster"
+             style="max-height: 140px; object-fit: cover;" />
+        <div class="card-body d-flex flex-column p-2">
+            <div class="mb-2">
+                <h6 class="card-title mb-1" style="font-size:1em;">@Model.Movie.Title</h6>
+                <p class="card-subtitle text-muted" style="font-size: 0.85em;">@Model.Movie.Year &middot; @Model.Movie.Genre</p>
+            </div>
+            <a asp-controller="Movies"
+               asp-action="Details_user"
+               asp-route-id="@Model.Movie.Id"
+               class="btn btn-primary btn-sm mt-auto">
+                View details
+            </a>
+            @if (Model.ShowRemoveFavorite == true)
+            {
+                <form asp-controller="User" asp-action="RemoveFavorite" method="post" class="mt-2">
+                    <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+                    <button type="submit" class="btn btn-sm btn-danger w-100" onclick="return confirm('Remove this movie from favorites?');">Remove from Favorites</button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
