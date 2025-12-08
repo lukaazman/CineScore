@@ -1,0 +1,70 @@
+@model User
+@using System.Linq
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+<div>
+    <h4>User Profile</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @if (Model.Id == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+            {
+                <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index">Manage profile</a>
+            }
+        </dt>
+        <!-- Add more fields as needed -->
+    </dl>
+</div>
+
+<div>
+    <h4>Reviews</h4>
+    <hr />
+    @if (Model.Comments != null && Model.Comments.Any())
+    {
+        foreach (var comment in Model.Comments.OrderByDescending(c => c.CreatedAt))
+        {
+            <div class="mb-3 p-3 border rounded bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>@(comment.Rating)/5</strong>
+                    <div>
+                        <small class="text-muted">@comment.CreatedAt.ToString("MMMM dd, yyyy")</small>
+                        @if (comment.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                            {
+                                <form asp-action="DeleteComment" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@comment.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</button>
+                                </form>
+                            }
+                    </div>
+                </div>
+                <div>
+                    <span class="fw-bold">Film:</span> @comment.Movie?.Title
+                </div>
+                <p class="mb-0">@comment.Text</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-muted">No reviews yet by this user.</p>
+    }
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit Profile</a> |
+    <a asp-action="Back">Back</a>
+</div>
