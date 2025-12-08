@@ -1,5 +1,15 @@
 ﻿@model IEnumerable<Movie>
 
+@functions {
+    public string TruncateWords(string text, int wordLimit)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return "";
+        var words = text.Split(' ');
+        if (words.Length <= wordLimit) return text;
+        return string.Join(" ", words.Take(wordLimit)) + "...";
+    }
+}
+
 @{
     ViewData["Title"] = "Home";
 }
@@ -24,13 +34,14 @@ else
                 <div class="card h-100 shadow-sm">
                     <img src="@(string.IsNullOrWhiteSpace(movie.PosterUrl) ? "https://via.placeholder.com/500x750?text=No+Poster" : movie.PosterUrl)"
                          class="card-img-top"
-                         alt="@movie.Title poster">
+                         alt="@movie.Title poster"
+                         style="max-height: 375px; object-fit: cover;" />
                     <div class="card-body d-flex flex-column">
                         <div class="mb-2">
                             <h5 class="card-title mb-1">@movie.Title</h5>
                             <p class="card-subtitle text-muted">@movie.Year &middot; @movie.Genre</p>
                         </div>
-                        <p class="card-text text-muted flex-grow-1">@movie.Description</p>
+                        <p class="card-text text-muted flex-grow-1">@TruncateWords(movie.Description, 20)</p>
                         <a asp-controller="Movies"
                            asp-action="Details_user"
                            asp-route-id="@movie.Id"
