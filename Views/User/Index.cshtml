@@ -31,6 +31,38 @@
 </div>
 
 <div>
+    <h4>Favorited Movies</h4>
+    <hr />
+    @{
+        var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var isProfileOwner = Model.Id == currentUserId;
+        var favorites = Model.Favorites != null ? Model.Favorites : new List<Favorite>();
+    }
+    @if (favorites.Any())
+    {
+        foreach (var favorite in favorites)
+        {
+            <div class="mb-3 p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="fw-bold">Film:</span> @favorite.Movie?.Title
+                </div>
+                @if (isProfileOwner)
+                {
+                    <form asp-controller="User" asp-action="RemoveFavorite" method="post" class="d-inline">
+                        <input type="hidden" name="movieId" value="@favorite.MovieId" />
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove this movie from favorites?');">Remove from Favorites</button>
+                    </form>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-muted">No favorited movies yet.</p>
+    }
+</div>
+
+<div>
     <h4>Reviews</h4>
     <hr />
     @if (Model.Comments != null && Model.Comments.Any())
