@@ -19,113 +19,113 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
 build_property.RootNamespace = CineScore
 build_property.RootNamespace = CineScore
-build_property.ProjectDir = C:\Users\lukaa\Documents\GitHub\CineScore\
+build_property.ProjectDir = D:\GitHub\CineScore\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\lukaa\Documents\GitHub\CineScore
+build_property.MSBuildProjectDirectory = D:\GitHub\CineScore
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/GitHub/CineScore/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Home/Admin_dashboard.cshtml]
+[D:/GitHub/CineScore/Views/Home/Admin_dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbl9kYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Home/Index.cshtml]
+[D:/GitHub/CineScore/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Home/Privacy.cshtml]
+[D:/GitHub/CineScore/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Home/TopRated.cshtml]
+[D:/GitHub/CineScore/Views/Home/TopRated.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUb3BSYXRlZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Create.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Delete.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Details.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Details_user.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Details_user.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERldGFpbHNfdXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Edit.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Index.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Movies/Review.cshtml]
+[D:/GitHub/CineScore/Views/Movies/Review.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFJldmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Shared/Error.cshtml]
+[D:/GitHub/CineScore/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Shared/_LoginPartial.cshtml]
+[D:/GitHub/CineScore/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/GitHub/CineScore/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/_ViewImports.cshtml]
+[D:/GitHub/CineScore/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/_ViewStart.cshtml]
+[D:/GitHub/CineScore/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lukaa/Documents/GitHub/CineScore/Views/Shared/_Layout.cshtml]
+[D:/GitHub/CineScore/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-o2r2wa9fqa
