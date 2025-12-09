@@ -95,6 +95,13 @@ namespace CineScore.Controllers
                 return NotFound();
             }
 
+            var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            ViewBag.IsFavorite = false;
+            if (currentUserId != null && id != null)
+            {
+                ViewBag.IsFavorite = await _context.Favorites.AnyAsync(f => f.UserId == currentUserId && f.MovieId == id.Value);
+            }
+
             var movie = await _context.Movies
                 .Include(m => m.Comments)
                     .ThenInclude(c => c.User)
