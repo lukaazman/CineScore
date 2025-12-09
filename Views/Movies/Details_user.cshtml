@@ -5,14 +5,14 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="col-md-4">
-    @if (!string.IsNullOrEmpty(Model.PosterUrl))
+<div class="col-md-4 mb-3">
+    @if (!string.IsNullOrWhiteSpace(Model.PosterUrl))
     {
-        <img src="@Model.PosterUrl" class="img-fluid rounded" alt="@Model.Title" />
+        <img src="@Model.PosterUrl" class="img-fluid rounded" alt="@Model.Title poster" />
     }
     else
     {
-        <img src="@Url.Content("~/images/placeholder.jpg") class="img-fluid rounded" alt="No image available" />
+        <img src="https://via.placeholder.com/500x750?text=No+Poster" class="img-fluid rounded" alt="No image available" />
     }
 </div>
 

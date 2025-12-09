@@ -1,9 +1,11 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using CineScore.Models;
 using CineScore.Data;
-using Microsoft.EntityFrameworkCore;
+using CineScore.Models;
+using CineScore.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Linq;
 
 namespace CineScore.Controllers;
@@ -11,9 +13,14 @@ namespace CineScore.Controllers;
 public class HomeController : Controller
 {
     private readonly CineScoreContext _context;
-    public HomeController(CineScoreContext context)
+    private readonly TmdbService _tmdbService;
+    private readonly TmdbOptions _tmdbOptions;
+
+    public HomeController(CineScoreContext context, TmdbService tmdbService, IOptions<TmdbOptions> tmdbOptions)
     {
         _context = context;
+        _tmdbService = tmdbService;
+        _tmdbOptions = tmdbOptions.Value;
     }
 
     // GET: Home/Admin_dashboard
@@ -23,15 +30,32 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var movies = await _context.Movies.AsNoTracking().ToListAsync();
-        return View(movies);
+        var clampedPage = Math.Clamp(page, 1, _tmdbOptions.MaxPages);
+        var popular = await _tmdbService.GetPopularMoviesAsync(clampedPage);
+
+        var movieIds = popular.Movies.Select(m => m.Id).ToList();
+        var movies = await _context.Movies
+            .Where(m => movieIds.Contains(m.Id))
+            .AsNoTracking()
+            .ToListAsync();
+
+        ViewData["Title"] = "Home";
+        ViewData["Heading"] = "Discover Movies";
+        ViewData["Lead"] = "Browse the latest popular titles from TMDB.";
+
+        return View("Index", new PagedMoviesResult(movies, popular.CurrentPage, popular.TotalPages));
     }
 
-        public async Task<IActionResult> TopRated()
+    public async Task<IActionResult> TopRated(int page = 1)
     {
+        var clampedPage = Math.Clamp(page, 1, _tmdbOptions.MaxPages);
+        var topRated = await _tmdbService.GetTopRatedMoviesAsync(clampedPage);
+
+        var movieIds = topRated.Movies.Select(m => m.Id).ToList();
         var movies = await _context.Movies
+            .Where(m => movieIds.Contains(m.Id))
             .Include(m => m.Comments)
             .AsNoTracking()
             .Select(m => new
@@ -46,7 +70,11 @@ public class HomeController : Controller
             .Select(result => result.Movie)
             .ToListAsync();
 
-        return View(movies);
+        ViewData["Title"] = "Top Rated";
+        ViewData["Heading"] = "Top Rated Movies";
+        ViewData["Lead"] = "Movies sorted by community ratings. Showing only the best.";
+
+        return View("TopRated", new PagedMoviesResult(movies, topRated.CurrentPage, topRated.TotalPages));
     }
 
     public IActionResult Privacy()
