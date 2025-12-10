@@ -43,7 +43,7 @@ public class HomeController : Controller
 
         ViewData["Title"] = "Home";
         ViewData["Heading"] = "Discover Movies";
-        ViewData["Lead"] = "Browse the latest popular titles from TMDB.";
+        ViewData["Lead"] = "Browse the latest popular titles.";
 
         return View("Index", new PagedMoviesResult(movies, popular.CurrentPage, popular.TotalPages));
     }
@@ -72,7 +72,7 @@ public class HomeController : Controller
 
         ViewData["Title"] = "Top Rated";
         ViewData["Heading"] = "Top Rated Movies";
-        ViewData["Lead"] = "Movies sorted by community ratings. Showing only the best.";
+        ViewData["Lead"] = "Movies sorted by community ratings.";
 
         return View("TopRated", new PagedMoviesResult(movies, topRated.CurrentPage, topRated.TotalPages));
     }

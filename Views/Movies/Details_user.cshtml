@@ -8,11 +8,18 @@
 <div class="col-md-4 mb-3">
     @if (!string.IsNullOrWhiteSpace(Model.PosterUrl))
     {
-        <img src="@Model.PosterUrl" class="img-fluid rounded" alt="@Model.Title poster" />
+        <img src="@Model.PosterUrl"
+             class="img-fluid rounded"
+             alt="@Model.Title poster"
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/500x750?text=No+Poster';" />
     }
     else
     {
-        <img src="https://via.placeholder.com/500x750?text=No+Poster" class="img-fluid rounded" alt="No image available" />
+        <img src="https://via.placeholder.com/500x750?text=No+Poster"
+             class="img-fluid rounded"
+             alt="No image available"
+             onerror="this.onerror=null;this.src='@Url.Content("~/images/placeholder.jpg")';" />
+
     }
 </div>
 
@@ -67,6 +74,34 @@
                 <span>No ratings yet</span>
             }
         </dd>
+        <dt class = "col-sm-2">
+            @{
+                var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                bool isFavorite = ViewBag.IsFavorite ?? false;
+            }
+
+            @if (currentUserId != null)
+            {
+                if (!isFavorite)
+                {
+                    <form asp-controller="User" asp-action="AddFavorite" method="post" class="d-inline">
+                        <input type="hidden" name="movieId" value="@Model.Id" />
+                        <button type="submit" class="btn btn-warning">
+                            Add to Favorites
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="User" asp-action="RemoveFavorite" method="post" class="d-inline">
+                        <input type="hidden" name="movieId" value="@Model.Id" />
+                        <button type="submit" class="btn btn-danger">
+                            Remove from Favorites
+                        </button>
+                    </form>
+                }
+            }
+        </dt>
     </dl>
 </div>
 
