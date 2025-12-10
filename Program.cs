@@ -15,7 +15,7 @@ builder.Services.AddHttpClient<TmdbService>();
 builder.Services.AddDbContext<CineScoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConn")));
 
-builder.Services.AddDefaultIdentity<User>(options => 
+builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>() // Add role support
     .AddEntityFrameworkStores<CineScoreContext>();
