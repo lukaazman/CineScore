@@ -15,7 +15,8 @@
         <img src="@(string.IsNullOrWhiteSpace(Model.PosterUrl) ? "https://via.placeholder.com/500x750?text=No+Poster" : Model.PosterUrl)"
              class="card-img-top"
              alt="@Model.Title poster"
-             style="max-height: 375px; object-fit: cover;" />
+             style="max-height: 375px; object-fit: cover;"
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/500x750?text=No+Poster';" />
         <div class="card-body d-flex flex-column">
             <div class="mb-2">
                 <h5 class="card-title mb-1">@Model.Title</h5>
