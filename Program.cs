@@ -2,16 +2,20 @@ using CineScore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CineScore.Models;
+using CineScore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.Configure<TmdbOptions>(builder.Configuration.GetSection("Tmdb"));
+builder.Services.AddHttpClient<TmdbService>();
+
 builder.Services.AddDbContext<CineScoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConn")));
 
-builder.Services.AddDefaultIdentity<User>(options => 
+builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>() // Add role support
     .AddEntityFrameworkStores<CineScoreContext>();
