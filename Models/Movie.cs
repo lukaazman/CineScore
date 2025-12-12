@@ -12,6 +12,7 @@ namespace CineScore.Models
         public string Genre { get; set; } = "";
         public string Description { get; set; } = "";
         public string? PosterUrl { get; set; }
+        public string? BannerUrl { get; set; }
 
         public ICollection<Rating>? Ratings { get; set; }
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();

@@ -155,7 +155,7 @@ namespace CineScore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Title,Year,Genre,Description,PosterUrl")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,Year,Genre,Description,PosterUrl,BannerUrl")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -189,7 +189,7 @@ namespace CineScore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Genre,Description,PosterUrl")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Year,Genre,Description,PosterUrl,BannerUrl")] Movie movie)
         {
             if (id != movie.Id)
             {

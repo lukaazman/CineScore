@@ -5,18 +5,25 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="col-md-4 mb-3">
-    @if (!string.IsNullOrWhiteSpace(Model.PosterUrl))
+<div class="col-12 mb-3">
+    @{
+        var bannerSource = string.IsNullOrWhiteSpace(Model.BannerUrl)
+            ? Model.PosterUrl
+            : Model.BannerUrl;
+    }
+
+    @if (!string.IsNullOrWhiteSpace(bannerSource))
+
     {
-        <img src="@Model.PosterUrl"
-             class="img-fluid rounded"
-             alt="@Model.Title poster"
-             onerror="this.onerror=null;this.src='https://via.placeholder.com/500x750?text=No+Poster';" />
+        <img src="@bannerSource"
+             class="img-fluid rounded w-100"
+             alt="@Model.Title banner"
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/1920x1080?text=No+Banner';" />
     }
     else
     {
-        <img src="https://via.placeholder.com/500x750?text=No+Poster"
-             class="img-fluid rounded"
+        <img src="https://via.placeholder.com/1920x1080?text=No+Banner"
+             class="img-fluid rounded w-100"
              alt="No image available"
              onerror="this.onerror=null;this.src='@Url.Content("~/images/placeholder.jpg")';" />
 
