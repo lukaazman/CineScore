@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CineScore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7518ed80d8527c1d587030132d01555f1a5551de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac1c5690d713617b76be7f2a1f5881c07fc8a0d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("CineScore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CineScore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
