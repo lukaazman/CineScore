@@ -25,6 +25,12 @@ var app = builder.Build();
 // Seed roles and an initial admin user
 using (var scope = app.Services.CreateScope())
 {
+    var dbContext = scope.ServiceProvider.GetRequiredService<CineScoreContext>();
+
+    await SchemaGuard.EnsureBannerColumnAsync(dbContext);
+
+    await dbContext.Database.MigrateAsync();
+
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 

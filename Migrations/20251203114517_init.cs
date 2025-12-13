@@ -60,7 +60,9 @@ namespace CineScore.Migrations
                     Year = table.Column<int>(type: "int", nullable: false),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PosterUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PosterUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BannerUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+
                 },
                 constraints: table =>
                 {

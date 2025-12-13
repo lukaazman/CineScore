@@ -82,19 +82,30 @@ namespace CineScore.Services
                 .Select(id => _genreLookup![id])
                 .ToList();
 
+            var hasBackdrop = !string.IsNullOrWhiteSpace(source.BackdropPath);
+            var hasPoster = !string.IsNullOrWhiteSpace(source.PosterPath);
+            var bannerUrl = hasBackdrop
+                ? $"{_options.BannerImageBaseUrl}{source.BackdropPath}"
+                : hasPoster
+                    ? $"{_options.BannerFallbackPosterBaseUrl}{source.PosterPath}"
+                    : null;
+
             return new Movie
             {
                 Title = string.IsNullOrWhiteSpace(source.Title) ? source.OriginalTitle ?? "Untitled" : source.Title,
                 Description = string.IsNullOrWhiteSpace(source.Overview) ? "No description provided." : source.Overview,
                 Genre = genres.Any() ? string.Join(", ", genres) : "Uncategorized",
                 Year = releaseYear,
-                PosterUrl = string.IsNullOrWhiteSpace(source.PosterPath) ? null : $"{_options.ImageBaseUrl}{source.PosterPath}"
+                PosterUrl = hasPoster ? $"{_options.ImageBaseUrl}{source.PosterPath}" : null,
+                BannerUrl = bannerUrl
             };
         }
 
         private async Task<IEnumerable<Movie>> UpsertMoviesAsync(IEnumerable<Movie> movies)
         {
             var results = new List<Movie>();
+
+            await SchemaGuard.EnsureBannerColumnAsync(_context);
 
             foreach (var movie in movies)
             {
@@ -111,6 +122,7 @@ namespace CineScore.Services
                     existingMovie.Genre = movie.Genre;
                     existingMovie.Description = movie.Description;
                     existingMovie.PosterUrl = movie.PosterUrl;
+                    existingMovie.BannerUrl = movie.BannerUrl;
                     results.Add(existingMovie);
                 }
             }
@@ -148,6 +160,9 @@ namespace CineScore.Services
 
             [JsonPropertyName("poster_path")]
             public string? PosterPath { get; set; }
+
+            [JsonPropertyName("backdrop_path")]
+            public string? BackdropPath { get; set; }
 
             [JsonPropertyName("genre_ids")]
             public List<int> GenreIds { get; set; } = new();
