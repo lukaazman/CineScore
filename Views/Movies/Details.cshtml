@@ -7,6 +7,29 @@
 
 <h1>Details</h1>
 
+<div class="mb-3">
+    @{
+        var bannerSource = string.IsNullOrWhiteSpace(Model.BannerUrl)
+            ? Model.PosterUrl
+            : Model.BannerUrl;
+    }
+
+    @if (!string.IsNullOrWhiteSpace(bannerSource))
+    {
+        <img src="@bannerSource"
+             class="img-fluid rounded w-100"
+             alt="@Model.Title banner"
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/1280x720?text=No+Banner';" />
+    }
+    else
+    {
+        <img src="https://via.placeholder.com/1280x720?text=No+Banner"
+             class="img-fluid rounded w-100"
+             alt="No image available"
+             onerror="this.onerror=null;this.src='@Url.Content("~/images/placeholder.jpg")';" />
+    }
+</div>
+
 <div>
     <h4>Movie</h4>
     <hr />
@@ -40,6 +63,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PosterUrl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BannerUrl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BannerUrl)
         </dd>
     </dl>
 </div>
