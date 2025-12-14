@@ -16,7 +16,16 @@ else
     <div class="row g-4">
         @foreach (var movie in Model.Movies)
         {
-            @await Html.PartialAsync("_MovieCard", movie)
+double? avgRating = null;
+
+            if (movie.Comments != null && movie.Comments.Any(c => c.Rating > 0))
+            {
+                avgRating = movie.Comments
+                    .Where(c => c.Rating > 0)
+                    .Average(c => (double?)c.Rating);
+            }
+
+            @await Html.PartialAsync("_MovieCard", new MovieCardViewModel(movie, avgRating, true))
         }
     </div>
     <nav aria-label="Top rated movie pagination" class="mt-4">
