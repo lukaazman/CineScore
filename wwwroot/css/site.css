@@ -33,7 +33,7 @@ body {
 .movie-card {
   background: #f9fafc;
   border: none;
-  border-radius: 0 0 14px 14px;
+  border-radius: 2px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
