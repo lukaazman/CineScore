@@ -13,10 +13,10 @@
 }
 else
 {
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row gy-4 gx-3 gx-lg-4">
         @foreach (var movie in Model.Movies)
         {
-            @await Html.PartialAsync("_MovieCard", movie)
+            @await Html.PartialAsync("_MovieCard", new MovieCardViewModel(movie, null, false))
         }
     </div>
             <nav aria-label="Popular movie pagination" class="mt-4">
