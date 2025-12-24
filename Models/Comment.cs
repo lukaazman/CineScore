@@ -16,5 +16,6 @@ namespace CineScore.Models
 
         public User? User { get; set; }
         public Movie? Movie { get; set; }
+        public ICollection<CommentReaction> Reactions { get; set; } = new List<CommentReaction>();
     }
 }

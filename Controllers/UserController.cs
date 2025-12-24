@@ -19,20 +19,22 @@ public class UserController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Index(string? id)
     {
-        string userId = id ?? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-        if (userId == null)
+        string? userId = id ?? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userId))
         {
             return Unauthorized();
         }
 
         var user = await _context.Users
             .Include(u => u.Comments)
+                .ThenInclude(c => c.Reactions)
             .Include(u => u.Favorites)
                 .ThenInclude(f => f.Movie)
             .FirstOrDefaultAsync(u => u.Id == userId);
 
         var comments = await _context.Comments
             .Include(c => c.Movie)
+            .Include(c => c.Reactions)
             .Where(c => c.UserId == userId)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();

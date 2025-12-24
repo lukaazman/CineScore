@@ -7,7 +7,10 @@ namespace CineScore.Data
     {
         public static async Task EnsureBannerColumnAsync(DbContext context)
         {
-            const string sql = @"IF NOT EXISTS (
+            const string sql = @"IF EXISTS (
+    SELECT 1 FROM INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_NAME = 'Movies')
+AND NOT EXISTS (
     SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_NAME = 'Movies' AND COLUMN_NAME = 'BannerUrl')
 BEGIN
