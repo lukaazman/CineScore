@@ -11,9 +11,10 @@ namespace CineScore.Models
         //public string Email { get; set; } = "";
         //public string Password { get; set; } = "";
 
-        public ICollection<Rating>? Ratings { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
-        public ICollection<Favorite>? Favorites { get; set; }
+        public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+        public ICollection<CommentReaction> CommentReactions { get; set; } = new List<CommentReaction>();
         //public ICollection<Watchlist>? Watchlist { get; set; }
     }
 }

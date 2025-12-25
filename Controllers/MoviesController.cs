@@ -95,9 +95,9 @@ namespace CineScore.Controllers
                 return NotFound();
             }
 
-            var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            string? currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             ViewBag.IsFavorite = false;
-            if (currentUserId != null && id != null)
+            if (!string.IsNullOrEmpty(currentUserId) && id.HasValue)
             {
                 ViewBag.IsFavorite = await _context.Favorites.AnyAsync(f => f.UserId == currentUserId && f.MovieId == id.Value);
             }
@@ -105,6 +105,8 @@ namespace CineScore.Controllers
             var movie = await _context.Movies
                 .Include(m => m.Comments)
                     .ThenInclude(c => c.User)
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.Reactions)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
@@ -133,6 +135,8 @@ namespace CineScore.Controllers
             var movie = await _context.Movies
                 .Include(m => m.Comments)
                     .ThenInclude(c => c.User)
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.Reactions)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
@@ -150,8 +154,6 @@ namespace CineScore.Controllers
         }
 
         // POST: Movies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -184,8 +186,6 @@ namespace CineScore.Controllers
         }
 
         // POST: Movies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -257,6 +257,55 @@ namespace CineScore.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movies.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> ReactToComment(int commentId, string reactionType)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            var comment = await _context.Comments
+                .Include(c => c.Reactions)
+                .FirstOrDefaultAsync(c => c.Id == commentId);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            bool isLike = string.Equals(reactionType, "like", StringComparison.OrdinalIgnoreCase);
+            bool isDislike = string.Equals(reactionType, "dislike", StringComparison.OrdinalIgnoreCase);
+            if (!isLike && !isDislike)
+            {
+                return BadRequest();
+            }
+
+            var existingReaction = comment.Reactions.FirstOrDefault(r => r.UserId == userId);
+
+            if (existingReaction == null)
+            {
+                _context.CommentReactions.Add(new CommentReaction
+                {
+                    CommentId = commentId,
+                    UserId = userId,
+                    IsLike = isLike
+                });
+            }
+            else if (existingReaction.IsLike != isLike)
+            {
+                existingReaction.IsLike = isLike;
+                _context.CommentReactions.Update(existingReaction);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details_user", new { id = comment.MovieId });
         }
     }
 }
