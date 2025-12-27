@@ -16,13 +16,13 @@ Začetna stran kjer so navedeni filmi, Registracija/Prijava računa, Stran za up
 ##### Upraviteljski del:
 Stran za urejanje s filmi in Stran za urejanje z uporabniškimi računi.
 
-## API
+#### API
 REST API je na lokaciji `/api/v1/movies` in vrača podatke v JSON formatu. Za dostop je potreben API ključ, ki se pošlje v glavi `ApiKey`. Ključ nastavimo v `appsettings.json` (`ApiKey`), za produkcijo pa ga konfiguriramo preko spremenljivke okolja ali skrivnosti za Azure Web App.
 
-### Swagger dokumentacija
+#### Swagger dokumentacija
 Swagger UI je na voljo na `/swagger` in prikazuje vse CRUD operacije za filme skupaj z možnostjo dodajanja API ključa v glavi zahteve.
 
-### Primeri klicev
+##### Primeri klicev
 
 Pridobivanje filmov:
 ```bash
