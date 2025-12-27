@@ -1,5 +1,6 @@
 using CineScore.Data;
 using CineScore.Models;
+using CineScore.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace CineScore.Controllers.Api
 {
     [ApiController]
     [Route("api/v1/movies")]
+    [ApiKeyAuth]
     public class MoviesApiController : ControllerBase
     {
         private readonly CineScoreContext _context;
