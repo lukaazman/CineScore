@@ -5,45 +5,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.getElementById('navbarSearchForm');
     const searchInput = document.getElementById('navbarSearchInput');
-    const searchToggle = document.getElementById('navbarSearchToggle');
+    const searchButton = document.querySelector('.nav-search-button');
 
-    if (!searchForm || !searchInput || !searchToggle) {
+    if (!searchForm || !searchInput) {
         return;
     }
 
-    const showInput = () => {
-        searchInput.classList.add('show');
-        searchInput.removeAttribute('aria-hidden');
-        searchInput.focus();
-    };
-
-    const hideInput = () => {
-        searchInput.classList.remove('show');
-        searchInput.setAttribute('aria-hidden', 'true');
-        searchInput.value = '';
-    };
-
-    searchToggle.addEventListener('click', (event) => {
-        event.preventDefault();
-        const isVisible = searchInput.classList.contains('show');
-
-        if (!isVisible) {
-            showInput();
-            return;
-        }
-
-        if (searchInput.value.trim() !== '') {
-            searchForm.submit();
-        }
-        else {
-            hideInput();
-        }
-    });
+    if (searchButton) {
+        searchButton.addEventListener('click', (event) => {
+            const isCollapsed = searchInput.offsetWidth === 0 || window.getComputedStyle(searchInput).maxWidth === '0px';
+            if (searchInput.value.trim() === '' && isCollapsed) {
+                event.preventDefault();
+                searchInput.focus();
+            }
+        });
+    }
 
     searchForm.addEventListener('submit', (event) => {
         if (searchInput.value.trim() === '') {
             event.preventDefault();
-            hideInput();
         }
         else {
             searchInput.value = searchInput.value.trim();
@@ -52,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchInput.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
-            hideInput();
+            searchInput.blur();
+            searchInput.value = '';
         }
     });
 });
