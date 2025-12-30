@@ -48,6 +48,24 @@ public class HomeController : Controller
         return View("Index", new PagedMoviesResult(movies, popular.CurrentPage, popular.TotalPages));
     }
 
+    public async Task<IActionResult> Search(string? query, int page = 1)
+    {
+        var trimmedQuery = query?.Trim() ?? string.Empty;
+        var clampedPage = Math.Clamp(page, 1, _tmdbOptions.MaxPages);
+        var searchResults = await _tmdbService.SearchMoviesAsync(trimmedQuery, clampedPage);
+
+        ViewData["Title"] = "Search";
+        ViewData["Heading"] = string.IsNullOrWhiteSpace(trimmedQuery)
+            ? "Search Movies"
+            : $"Results for \"{trimmedQuery}\"";
+        ViewData["Lead"] = string.IsNullOrWhiteSpace(trimmedQuery)
+            ? "Find movies by name."
+            : "Browse the closest matches to your search.";
+        ViewData["SearchQuery"] = trimmedQuery;
+
+        return View("Search", searchResults);
+    }
+
     public async Task<IActionResult> TopRated(int page = 1)
     {
         var clampedPage = Math.Clamp(page, 1, _tmdbOptions.MaxPages);

@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System;
 using CineScore.Data;
 using CineScore.Models;
 using Microsoft.EntityFrameworkCore;
@@ -37,11 +38,28 @@ namespace CineScore.Services
             return await MapAndPersistAsync(response, page);
         }
 
-        private async Task<PagedMoviesResult> MapAndPersistAsync(TmdbResponse? response, int page)
+        public async Task<PagedMoviesResult> SearchMoviesAsync(string query, int page)
+        {
+            var trimmedQuery = (query ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(trimmedQuery))
+            {
+                return new PagedMoviesResult(Enumerable.Empty<Movie>(), 1, 1, string.Empty);
+            }
+
+            var clampedPage = Math.Clamp(page, 1, _options.MaxPages);
+            var encodedQuery = Uri.EscapeDataString(trimmedQuery);
+
+            var response = await _httpClient.GetFromJsonAsync<TmdbResponse>(
+                $"search/movie?query={encodedQuery}&include_adult=false&language=en-US&sort_by=original_title.asc&page={clampedPage}&api_key={_options.ApiKey}");
+
+            return await MapAndPersistAsync(response, clampedPage, trimmedQuery);
+        }
+
+        private async Task<PagedMoviesResult> MapAndPersistAsync(TmdbResponse? response, int page, string? searchQuery = null)
         {
             if (response?.Results == null)
             {
-                return new PagedMoviesResult(Enumerable.Empty<Movie>(), page, _options.MaxPages);
+                return new PagedMoviesResult(Enumerable.Empty<Movie>(), page, _options.MaxPages, searchQuery);
             }
 
             await EnsureGenresAsync();
@@ -55,7 +73,7 @@ namespace CineScore.Services
 
             var totalPages = Math.Max(1, Math.Min(response.TotalPages, _options.MaxPages));
 
-            return new PagedMoviesResult(persistedMovies, Math.Clamp(page, 1, totalPages), totalPages);
+            return new PagedMoviesResult(persistedMovies, Math.Clamp(page, 1, totalPages), totalPages, searchQuery);
         }
 
         private async Task EnsureGenresAsync()
