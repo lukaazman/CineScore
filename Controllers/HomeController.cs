@@ -52,7 +52,24 @@ public class HomeController : Controller
     {
         var trimmedQuery = query?.Trim() ?? string.Empty;
         var clampedPage = Math.Clamp(page, 1, _tmdbOptions.MaxPages);
-        var searchResults = await _tmdbService.SearchMoviesAsync(trimmedQuery, clampedPage);
+        var aggregatedMovies = new List<Movie>();
+        PagedMoviesResult? latestResult = null;
+        var maxPagesToFetch = _tmdbOptions.MaxPages;
+
+        for (var p = 1; p <= maxPagesToFetch; p++)
+        {
+            var searchResults = await _tmdbService.SearchMoviesAsync(trimmedQuery, p);
+            latestResult = searchResults;
+
+            aggregatedMovies.AddRange(searchResults.Movies);
+
+            if (p >= searchResults.TotalPages)
+            {
+                break;
+            }
+        }
+
+        latestResult ??= new PagedMoviesResult(Enumerable.Empty<Movie>(), 1, 1, trimmedQuery);
 
         ViewData["Title"] = "Search";
         ViewData["Heading"] = string.IsNullOrWhiteSpace(trimmedQuery)
@@ -63,7 +80,28 @@ public class HomeController : Controller
             : "Browse the closest matches to your search.";
         ViewData["SearchQuery"] = trimmedQuery;
 
-        return View("Search", searchResults);
+        var filteredMovies = aggregatedMovies
+            .Where(movie => !(string.IsNullOrWhiteSpace(movie.PosterUrl)
+                && string.Equals(movie.Genre, "Uncategorized", StringComparison.OrdinalIgnoreCase)))
+            .ToList();
+
+        var pageSize = _tmdbOptions.PageSize;
+        var filteredTotalPages = Math.Max(1, (int)Math.Ceiling(filteredMovies.Count / (double)pageSize));
+        var boundedTotalPages = Math.Max(1, Math.Min(filteredTotalPages, maxPagesToFetch));
+        var currentPage = Math.Clamp(clampedPage, 1, boundedTotalPages);
+
+        var pagedMovies = filteredMovies
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var filteredResults = new PagedMoviesResult(
+            pagedMovies,
+            currentPage,
+            boundedTotalPages,
+            latestResult.SearchQuery);
+
+        return View("Search", filteredResults);
     }
 
     public async Task<IActionResult> TopRated(int page = 1)
