@@ -21,6 +21,214 @@ body {
   margin-bottom: 60px;
 }
 
+.cinescore-brand {
+  font-family: "Montserrat", "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-menu-button {
+  border-radius: 10px;
+  padding: 0.4rem 0.85rem;
+  font-weight: 600;
+  min-height: 38px;
+  background: #ffffff;
+  color: #6c757d;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-menu-button:hover,
+.nav-menu-button:focus {
+  background: #f1f3f5;
+  color: #343a40;
+  border-color: #ced4da;
+}
+
+.nav-menu-dropdown {
+  min-width: 180px;
+  padding: 0.25rem;
+}
+
+.nav-menu-dropdown .dropdown-item {
+  border-radius: 6px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: color 0.18s ease, background-color 0.18s ease;
+  color: #6c757d;
+}
+
+.nav-menu-dropdown .dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.nav-menu-dropdown .dropdown-item:hover,
+.nav-menu-dropdown .dropdown-item:focus {
+  color: #212529;
+}
+
+.user-menu-toggle {
+  padding: 0.45rem 0.6rem;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.user-menu-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.user-dropdown-menu {
+  min-width: 220px;
+  padding: 0.4rem 0.75rem;
+}
+
+.user-dropdown-menu .dropdown-item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #6c757d;
+  transition: color 0.18s ease, background-color 0.18s ease;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+}
+
+.user-dropdown-menu .dropdown-item-text {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: #6c757d;
+  transition: color 0.18s ease, background-color 0.18s ease;
+  position: relative;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  width: 100%;
+}
+
+.user-dropdown-menu .dropdown-item-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.10);
+  display: block;
+  transition: background-color 0.18s ease, height 0.18s ease;
+}
+
+.user-dropdown-menu .dropdown-item-text:hover::after,
+.user-dropdown-menu .dropdown-item-text:focus::after {
+  background: rgba(0, 0, 0, 0.18);
+  height: 3px;
+}
+
+.user-dropdown-menu .dropdown-item:last-child,
+.user-dropdown-menu .dropdown-item-text:last-child {
+  border-bottom: none;
+}
+
+.user-dropdown-menu .dropdown-item:hover,
+.user-dropdown-menu .dropdown-item:focus,
+.nav-menu-dropdown .dropdown-item:hover,
+.nav-menu-dropdown .dropdown-item:focus {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #212529;
+}
+
+.user-dropdown-menu .btn-link {
+  text-decoration: none;
+}
+
+.logout-button {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  background: transparent;
+  border: none;
+  display: block;
+  height: 100%;
+  transition: color 0.18s ease;
+}
+
+.user-dropdown-menu .dropdown-item:hover .logout-button,
+.user-dropdown-menu .dropdown-item:focus .logout-button {
+  color: #212529;
+}
+.nav-search-form {
+  min-width: 38px;
+  margin: 0;
+}
+
+.nav-search-bar {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 38px;
+  min-height: 38px;
+  transition: background-color 0.18s ease;
+}
+
+.nav-search-input {
+  flex: 0 0 auto;
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  font-size: 0.95rem;
+  transition: max-width 0.22s ease, opacity 0.18s ease, padding 0.18s ease;
+}
+
+.nav-search-form:hover .nav-search-input,
+.nav-search-form:focus-within .nav-search-input {
+  max-width: 260px;
+  opacity: 1;
+  padding: 0.5rem 0.75rem;
+}
+
+.nav-search-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-search-input::placeholder {
+  color: #9aa0a6;
+}
+
+.nav-search-button {
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  padding: 0.5rem 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-search-button:hover {
+  background-color: #f1f3f5;
+  color: #343a40;
+}
+
+.nav-search-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;
@@ -160,4 +368,10 @@ body {
   .movie-card .movie-poster {
     max-height: none;
   }
+}
+
+@media (max-width: 576px) {
+  .nav-search-form { min-width: 0; width: 100%; }
+  .nav-search-bar { min-width: 0; }
+  .nav-search-input { max-width: none; padding: 0.5rem 0.75rem; opacity: 1; flex: 1 1 auto; }
 }

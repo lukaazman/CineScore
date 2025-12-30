@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "User Profile";
 }
-<div>
+<div class="mb-5">
     <h4>User Profile</h4>
     <hr />
     <dl class="row">
@@ -30,7 +30,7 @@
     </dl>
 </div>
 
-<div>
+<div class="mb-5">
     <h4>Favorited Movies</h4>
     <hr />
     @{
@@ -53,7 +53,7 @@
     }
 </div>
 
-<div>
+<div class="mb-5">
     <h4>Reviews</h4>
     <hr />
     @if (Model.Comments != null && Model.Comments.Any())
@@ -105,9 +105,4 @@
     {
         <p class="text-muted">No reviews yet by this user.</p>
     }
-</div>
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit Profile</a> |
-    <a asp-action="Back">Back</a>
 </div>
