@@ -28,7 +28,12 @@ namespace CineScore.Controllers.Api
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Movie>> GetMovie(int id)
         {
-            var movie = await _context.Movies.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            var movie = await _context.Movies
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.User)
+                .Include(m => m.Ratings)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (movie == null)
             {
