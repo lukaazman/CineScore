@@ -26,7 +26,6 @@
                 <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index">Manage profile</a>
             }
         </dt>
-        <!-- Add more fields as needed -->
     </dl>
 </div>
 
@@ -63,23 +62,30 @@
             var likeCount = comment.Reactions?.Count(r => r.IsLike) ?? 0;
             var dislikeCount = comment.Reactions?.Count(r => !r.IsLike) ?? 0;
             <div class="mb-3 p-3 border rounded bg-light">
-                <div class="d-flex justify-content-between align-items-center">
-                    <strong>@(comment.Rating)/5</strong>
+                <div class="d-flex justify-content-between gap-2">
                     <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <a asp-controller="Movies"
+                               asp-action="Details_user"
+                               asp-route-id="@comment.MovieId"
+                               class="fw-bold text-uppercase text-decoration-none text-dark">
+                                @((comment.Movie?.Title ?? "Unknown").ToUpperInvariant())
+                            </a>
+                            <span class="fw-semibold">@comment.Rating/5</span>
+                        </div>
+                        <p class="mb-0 mt-1">@comment.Text</p>
+                    </div>
+                    <div class="d-flex align-items-start gap-2">
                         <small class="text-muted">@comment.CreatedAt.ToString("MMMM dd, yyyy")</small>
                         @if (comment.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
-                            {
-                                <form asp-action="DeleteComment" method="post" class="d-inline">
-                                    <input type="hidden" name="id" value="@comment.Id" />
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</button>
-                                </form>
-                            }
+                        {
+                            <form asp-action="DeleteComment" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@comment.Id" />
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</button>
+                            </form>
+                        }
                     </div>
                 </div>
-                <div>
-                    <span class="fw-bold">Film:</span> @comment.Movie?.Title
-                </div>
-                <p class="mb-0">@comment.Text</p>
                 <div class="d-flex align-items-center gap-3 mt-2">
                     <div class="d-flex align-items-center gap-2">
                         <button class="btn btn-sm btn-outline-success d-flex align-items-center gap-1 px-2 py-1" disabled title="Not allowed to react">
