@@ -48,6 +48,11 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddRoles<IdentityRole>() // Add role support
     .AddEntityFrameworkStores<CineScoreContext>();
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
+
 var app = builder.Build();
 
 // Seed roles and an initial admin user
