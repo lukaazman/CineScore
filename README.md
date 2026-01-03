@@ -62,7 +62,7 @@ Tukaj so slike, ki prikazujejo spletno stran, za slike **Android aplikacije** ob
 <img src="screenshots/image1.jpg" width="45%"> <img src="screenshots/image2.jpg" width="45%"> <img src="screenshots/image3.jpg" width="45%"> <img src="screenshots/image4.jpg" width="45%">
 
 #### Podatkovna baza
-Lastne tabele (Slika 4, moder gradient)
+Lastne tabele (Slika 4)
 - Movies: filmi z osnovnimi podatki (naslov, leto, žanr, opis, URL za poster/banner) in povezavami na ocene in komentarje.
 - Ratings: ocene filmov, vsaka vrstica ima svojo oceno, referenco na uporabnika in film (UserId, MovieId).
 - Comments: komentarji za filme, vsebujejo besedilo, število zvezdic (Rating), čas nastanka ter povezave na uporabnika in film.
