@@ -59,7 +59,7 @@ skoraj vsemi deli spletne aplikacije, zato spodaj navedeni deli zgolj določajo 
 ## Slike
 Tukaj so slike, ki prikazujejo spletno stran, za slike **Android aplikacije** obiščite: "https://github.com/butarca/CineScore-android"
 
-<img src="screenshots/image1.jpg" width="45%"> <img src="screenshots/image2.jpg" width="44%"> <img src="screenshots/image3.jpg" width="45%"> <img src="screenshots/image4.jpg" width="45%">
+<img src="screenshots/image1.jpg" width="45%"> <img src="screenshots/image2.jpg" width="45%"> <img src="screenshots/image3.jpg" width="45%"> <img src="screenshots/image4.jpg" width="45%">
 
 #### Podatkovna baza
 Lastne tabele (Slika 4, moder gradient)
