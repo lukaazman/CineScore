@@ -5,7 +5,7 @@
 63240036 **Tilen Butara**  
 63230009 **Luka Ažman**
 
-### Splošen Opis:
+## Splošen Opis:
 Spletna aplikacija CineScore je namenjena pregledu ocen in ocenjevanje filmov, ki so deljeni po letu izdaje, žanru in oceni, kar uporabnikom omogoča lažje iskanje po željenem atributu. Uporabniki imajo možnost registracije in prijave v račun, kar služi kot shramba vseh ocen in komentarjev, ki jih je uporabnik objavil, poleg tega bo račun imel tudi funkcije kot so "Favorites", "Watchlist", ...
 
 #### Spletna Stran:
@@ -16,7 +16,7 @@ Začetna stran kjer so navedeni filmi, Registracija/Prijava računa, Stran za up
 ##### Upraviteljski del:
 Stran za urejanje s filmi in Stran za urejanje z uporabniškimi računi.
 
-#### API
+## API
 REST API je na lokaciji `/api/v1/movies` in vrača podatke v JSON formatu. Za dostop je potreben API ključ, ki se pošlje v glavi `ApiKey`. Ključ nastavimo v `appsettings.json` (`ApiKey`), za produkcijo pa ga konfiguriramo preko spremenljivke okolja ali skrivnosti za Azure Web App.
 
 #### Swagger dokumentacija
@@ -36,3 +36,27 @@ curl -X POST -H "Content-Type: application/json" -H "ApiKey: <tvoj_kljuc>" \
   https://<localhost:####>/api/v1/movies
 ```
 
+## Razdelitev dela
+Tukaj je opisano katere dele naloge je opravil določen član. Naloge so namenoma imenovane bolj splošno, saj sva obadva imela opravka s
+skoraj vsemi deli spletne aplikacije, zato spodaj navedeni deli zgolj določajo kdo je naredil večji del tega dela naloge.
+
+#### Tilen Butara (63240036):
+- User dashboard
+- Favorite function
+- Admin dashboard
+- Android app
+- Azure database, webb app, auto-deploy
+- Readme.md
+
+#### Luka Ažman (63230009):
+- Css Styling 
+- Swagger, Rest, tmdb API
+- API auth
+- Movie search
+- Like/Dislike function
+- Readme.md
+
+## Slike
+Tukaj so slike, ki prikazujejo spletno stran, za slike **Android aplikacije** obiščite: "https://github.com/butarca/CineScore-android"
+
+<img src="screenshots/image1.jpg" width="45%"> <img src="screenshots/image2.jpg" width="44%"> <img src="screenshots/image3.jpg" width="45%">
