@@ -17,6 +17,19 @@ Začetna stran kjer so navedeni filmi, Registracija/Prijava računa, Stran za up
 Stran za urejanje s filmi in Stran za urejanje z uporabniškimi računi.
 
 ## API
+Skrivnosti niso shranjene v repozitoriju. Za lokalni razvoj jih nastavi z `dotnet user-secrets`, v Azure pa z App Service settings/environment variables. Primer:
+
+```bash
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<connection-string>"
+dotnet user-secrets set "ApiKey" "<api-key>"
+dotnet user-secrets set "Tmdb:ApiKey" "<tmdb-api-key>"
+dotnet user-secrets set "Tmdb:ReadAccessToken" "<tmdb-read-access-token>"
+dotnet user-secrets set "BootstrapAdmin:Email" "admin@example.com"
+dotnet user-secrets set "BootstrapAdmin:Username" "admin"
+dotnet user-secrets set "BootstrapAdmin:Password" "<strong-password>"
+```
+
+Za Azure uporabi ekvivalente z `__`, na primer `ConnectionStrings__AzureConn`, `Tmdb__ApiKey`, `Tmdb__ReadAccessToken`, `ApiKey` in `BootstrapAdmin__Password`.
 REST API je na lokaciji `/api/v1/movies` in vrača podatke v JSON formatu. Za dostop je potreben API ključ, ki se pošlje v glavi `ApiKey`. Ključ nastavimo v `appsettings.json` (`ApiKey`), za produkcijo pa ga konfiguriramo preko spremenljivke okolja ali skrivnosti za Azure Web App.
 
 #### Swagger dokumentacija

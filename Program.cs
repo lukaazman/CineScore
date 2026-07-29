@@ -40,8 +40,18 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.Configure<TmdbOptions>(builder.Configuration.GetSection("Tmdb"));
 builder.Services.AddHttpClient<TmdbService>();
 
+var connectionString = builder.Configuration.GetConnectionString("AzureConn")
+    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException(
+        "No database connection string configured. Set ConnectionStrings__AzureConn " +
+        "or ConnectionStrings__DefaultConnection using environment variables or user secrets.");
+}
+
 builder.Services.AddDbContext<CineScoreContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConn")));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedAccount = false)
@@ -78,24 +88,38 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
-    // Optionally, create an initial admin user
-    var adminEmail = "admin@example.com";
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser == null)
-    {
-        adminUser = new User
-        {
-            UserName = "admin",
-            Email = adminEmail,
-            EmailConfirmed = true
-        };
-        await userManager.CreateAsync(adminUser, "<removed-secret>"); // Set a strong initial password
-    }
+    // Optionally create an initial admin user when explicitly configured through
+    // environment variables or user secrets. Never keep bootstrap credentials in source.
+    var adminEmail = builder.Configuration["BootstrapAdmin:Email"];
+    var adminUsername = builder.Configuration["BootstrapAdmin:Username"];
+    var adminPassword = builder.Configuration["BootstrapAdmin:Password"];
 
-    // Assign Admin role
-    if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+    if (!string.IsNullOrWhiteSpace(adminEmail) &&
+        !string.IsNullOrWhiteSpace(adminUsername) &&
+        !string.IsNullOrWhiteSpace(adminPassword))
     {
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
+        {
+            adminUser = new User
+            {
+                UserName = adminUsername,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
+
+            var createResult = await userManager.CreateAsync(adminUser, adminPassword);
+            if (!createResult.Succeeded)
+            {
+                var errors = string.Join(", ", createResult.Errors.Select(error => error.Description));
+                throw new InvalidOperationException($"Could not create bootstrap admin: {errors}");
+            }
+        }
+
+        if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
     }
 }
 

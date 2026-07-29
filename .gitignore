@@ -93,3 +93,6 @@ _ReSharper*/
 *.dbmdl
 *.bak
 *.backup
+# Build outputs
+bin/
+obj/
